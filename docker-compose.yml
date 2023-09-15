@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - /var/geolocation_service/data/postgres:/data
+    environment:
+      PGDATA: /data
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432

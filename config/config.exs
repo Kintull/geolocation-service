@@ -13,6 +13,9 @@ import Config
 config :geolocation_service,
   ecto_repos: [GeolocationService.Repo]
 
+config :geolocation_service_importer,
+  ecto_repos: [GeolocationServiceImporter.ImportRepo]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
@@ -53,6 +56,8 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :geolocation_service_importer, :http_adapter, HTTPoison
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

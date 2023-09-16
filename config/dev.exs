@@ -10,6 +10,15 @@ config :geolocation_service, GeolocationService.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :geolocation_service_importer, GeolocationServiceImporter.ImportRepo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "geolocation_service_importer_dev",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -65,7 +74,7 @@ config :geolocation_service_web, GeolocationServiceWeb.Endpoint,
   ]
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :console, format: "[$level] $message\n", level: :info
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime

@@ -11,3 +11,12 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
+
+  importer:
+    image: geolocation_service:latest
+    command: /bin/sh -c "/app/run_import_task.sh import_geolocation_csv_dump"
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@host.docker.internal/geolocation_service
+      SECRET_KEY_BASE: ByhHybH2MlwacB09Sx8B5Adq1x+VEOZpCaHFUTiNNykj1m4XHvJ4Kvb5ynASB9se
+      CSV_URL: https://geolocation-dumps.s3.eu-west-3.amazonaws.com/cloud_data_dump.csv
+

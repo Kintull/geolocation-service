@@ -9,9 +9,9 @@ defmodule GeolocationService.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      GeolocationService.Repo,
+      GeolocationService.Repo
       # Start the PubSub system
-      {Phoenix.PubSub, name: GeolocationService.PubSub}
+      #      {Phoenix.PubSub, name: GeolocationService.PubSub}
       # Start a worker by calling: GeolocationService.Worker.start_link(arg)
       # {GeolocationService.Worker, arg}
     ]

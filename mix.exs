@@ -7,7 +7,15 @@ defmodule GeolocationService.Umbrella.MixProject do
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+      releases: [
+        geolocation_service_importer: [
+          applications: [
+            geolocation_service_importer: :permanent,
+            geolocation_service: :permanent
+          ]
+        ]
+      ]
     ]
   end
 

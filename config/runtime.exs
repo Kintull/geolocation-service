@@ -49,8 +49,8 @@ if config_env() == :prod do
       port: String.to_integer(System.get_env("INTERNAL_PORT") || "4000")
     ],
     url: [
-      scheme: System.get_env("SCHEME", "https"),
-      host: System.get_env("HOST", "https://example.com"),
+      scheme: System.get_env("SCHEME") || "https",
+      host: System.get_env("HOSTNAME") || "example.com",
       port: String.to_integer(System.get_env("EXTERNAL_PORT") || "443")
     ],
     force_ssl: [rewrite_on: [:x_forwarded_proto]],

@@ -5,7 +5,7 @@ setup:
 
 build:
   docker:
-    web: ./docker/Dockerfile
+    web: Dockerfile.heroku
 
 run:
   web: /app/geolocation_service_web/bin/geolocation_service_web start

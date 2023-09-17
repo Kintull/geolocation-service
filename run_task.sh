@@ -4,4 +4,4 @@ TASK_NAME=$1
 
 set -x
 
-./bin/geolocation_service_importer eval "GeolocationServiceImporter.${TASK_NAME}()";
+/app/geolocation_service_importer/bin/geolocation_service_importer eval "GeolocationServiceImporter.${TASK_NAME}()";

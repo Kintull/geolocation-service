@@ -50,6 +50,7 @@ COPY config/runtime.exs config/
 
 RUN mix release geolocation_service_importer
 RUN mix release geolocation_service_web
+RUN mix release geolocation_service_migrator
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
@@ -71,8 +72,9 @@ RUN chown nobody /app
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/prod/rel/geolocation_service_importer ./geolocation_service_importer
 COPY --from=builder --chown=nobody:root /app/_build/prod/rel/geolocation_service_web ./geolocation_service_web
-COPY --from=builder --chown=nobody:root /app/run_task.sh ./geolocation_service_importer
+COPY --from=builder --chown=nobody:root /app/_build/prod/rel/geolocation_service_migrator ./geolocation_service_migrator
 
+COPY --from=builder --chown=nobody:root /app/run_task.sh ./geolocation_service_importer
 RUN chmod +x ./geolocation_service_importer/run_task.sh
 
 USER nobody

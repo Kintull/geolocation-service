@@ -6,6 +6,7 @@ setup:
 build:
   docker:
     web: Dockerfile.heroku
+    migrator: Dockerfile.heroku
   config:
     MIX_ENV: prod
     SECRET_KEY_BASE: $SECRET_KEY_BASE
@@ -14,6 +15,11 @@ build:
     EXTERNAL_PORT: 443,
     INTERNAL_PORT: 443,
     SCHEME: https
+
+release:
+  image: migrator
+  command:
+    - /app/geolocation_service_migrator/bin/geolocation_service_migrator eval "GeolocationService.Release.migrate()"
 
 run:
   web: /app/geolocation_service_web/bin/geolocation_service_web start

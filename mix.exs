@@ -14,6 +14,17 @@ defmodule GeolocationService.Umbrella.MixProject do
             geolocation_service_importer: :permanent,
             geolocation_service: :permanent
           ]
+        ],
+        geolocation_service_web: [
+          applications: [
+            geolocation_service_web: :permanent,
+            geolocation_service: :permanent
+          ]
+        ],
+        geolocation_service_migrator: [
+          applications: [
+            geolocation_service: :permanent
+          ]
         ]
       ]
     ]

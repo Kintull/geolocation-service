@@ -17,7 +17,7 @@ config :geolocation_service_importer, GeolocationServiceImporter.ImportRepo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "geolocation_service_importer_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "geolocation_service_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
@@ -31,10 +31,8 @@ config :geolocation_service_web, GeolocationServiceWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :info
 
-# In test we don't send emails.
-config :geolocation_service, GeolocationService.Mailer, adapter: Swoosh.Adapters.Test
-
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
 
 config :geolocation_service_importer, :http_adapter, GeolocationServiceImporter.HTTPoisonMock
+config :geolocation_service, :geolocation_service_impl, GeolocationServiceMock

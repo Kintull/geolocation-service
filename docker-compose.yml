@@ -20,3 +20,14 @@ services:
       SECRET_KEY_BASE: ByhHybH2MlwacB09Sx8B5Adq1x+VEOZpCaHFUTiNNykj1m4XHvJ4Kvb5ynASB9se
       CSV_URL: https://geolocation-dumps.s3.eu-west-3.amazonaws.com/cloud_data_dump.csv
 
+  web:
+    image: geolocation_service:latest
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@host.docker.internal/geolocation_service
+      SECRET_KEY_BASE: ByhHybH2MlwacB09Sx8B5Adq1x+VEOZpCaHFUTiNNykj1m4XHvJ4Kvb5ynASB9se
+      INTERNAL_PORT: 4000
+      EXTERNAL_PORT: 4000
+      HOST: localhost
+    ports:
+      - 4000:4000
+    command: /bin/sh -c "/app/geolocation_service_web/bin/geolocation_service_web start"

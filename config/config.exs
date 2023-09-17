@@ -16,37 +16,16 @@ config :geolocation_service,
 config :geolocation_service_importer,
   ecto_repos: [GeolocationServiceImporter.ImportRepo]
 
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :geolocation_service, GeolocationService.Mailer, adapter: Swoosh.Adapters.Local
-
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
-
-config :geolocation_service_web,
-  ecto_repos: [GeolocationService.Repo],
-  generators: [context_app: :geolocation_service]
+# config :geolocation_service_web, ecto_repos: []
 
 # Configures the endpoint
 config :geolocation_service_web, GeolocationServiceWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: GeolocationServiceWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: GeolocationService.PubSub,
-  live_view: [signing_salt: "k2o0d8k/"]
-
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.14.29",
-  default: [
-    args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../apps/geolocation_service_web/assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  render_errors: [
+    view: GeolocationServiceWeb.ErrorView,
+    format: "json",
+    accepts: ~w(json),
+    layout: false
   ]
 
 # Configures Elixir's Logger
@@ -58,6 +37,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :geolocation_service_importer, :http_adapter, HTTPoison
+config :geolocation_service, :geolocation_service_impl, GeolocationService.Impl
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -33,7 +33,7 @@ ENV MIX_ENV="prod"
 
 # copy umbrella app
 COPY apps apps
-COPY run_import_task.sh .
+COPY run_task.sh .
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -49,6 +49,7 @@ RUN mix compile
 COPY config/runtime.exs config/
 
 RUN mix release geolocation_service_importer
+RUN mix release geolocation_service_web
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
@@ -68,10 +69,11 @@ WORKDIR "/app"
 RUN chown nobody /app
 
 # Only copy the final release from the build stage
-COPY --from=builder --chown=nobody:root /app/_build/prod/rel/geolocation_service_importer .
-COPY --from=builder --chown=nobody:root /app/run_import_task.sh .
+COPY --from=builder --chown=nobody:root /app/_build/prod/rel/geolocation_service_importer ./geolocation_service_importer
+COPY --from=builder --chown=nobody:root /app/_build/prod/rel/geolocation_service_web ./geolocation_service_web
+COPY --from=builder --chown=nobody:root /app/run_task.sh ./geolocation_service_importer
 
-RUN chmod +x ./run_import_task.sh
+RUN chmod +x ./geolocation_service_importer/run_task.sh
 
 USER nobody
 

@@ -7,6 +7,8 @@ defmodule GeolocationService.Schema.Geolocation do
 
   @parameters [:ip_address, :country_code, :country, :city, :latitude, :longitude]
 
+  @type t :: %__MODULE__{}
+
   schema "geolocations" do
     field :ip_address, :binary
     field :country_code, :binary

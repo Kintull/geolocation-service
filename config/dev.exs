@@ -14,7 +14,7 @@ config :geolocation_service_importer, GeolocationServiceImporter.ImportRepo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "geolocation_service_importer_dev",
+  database: "geolocation_service_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -33,10 +33,7 @@ config :geolocation_service_web, GeolocationServiceWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "VcP2MUYzW5j6+MGlWwnTQ7bjaJcFK3gIkdqAoJX4svh2A4ZsLvbDPiNDwxFYwtxW",
-  watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
-  ]
+  watchers: []
 
 # ## SSL Support
 #

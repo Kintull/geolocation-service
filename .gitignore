@@ -26,6 +26,6 @@ erl_crash.dump
 /docker/.env
 
 # intellij
-geolocation_service_umbrella.iml
+*.iml
 /.idea/
 

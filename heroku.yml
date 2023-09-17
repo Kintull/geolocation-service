@@ -1,0 +1,11 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+
+build:
+  docker:
+    web: ./docker/Dockerfile
+
+run:
+  web: /app/geolocation_service_web/bin/geolocation_service_web start

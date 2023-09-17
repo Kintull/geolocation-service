@@ -17,12 +17,13 @@ if config_env() == :prod do
   maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
 
   config :geolocation_service, GeolocationService.Repo,
-    # ssl: true,
+    ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
 
   config :geolocation_service_importer, GeolocationServiceImporter.ImportRepo,
+    ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
@@ -48,9 +49,11 @@ if config_env() == :prod do
       port: String.to_integer(System.get_env("INTERNAL_PORT") || "4000")
     ],
     url: [
-      host: System.get_env("HOST", "example.com"),
-      port: String.to_integer(System.get_env("EXTERNAL_PORT") || "80")
+      scheme: System.get_env("SCHEME", "https"),
+      host: System.get_env("HOST", "https://example.com"),
+      port: String.to_integer(System.get_env("EXTERNAL_PORT") || "443")
     ],
+    force_ssl: [rewrite_on: [:x_forwarded_proto]],
     secret_key_base: secret_key_base,
     server: true
 

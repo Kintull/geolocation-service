@@ -6,6 +6,13 @@ setup:
 build:
   docker:
     web: Dockerfile.heroku
+  config:
+    MIX_ENV: prod
+    SECRET_KEY_BASE: $SECRET_KEY_BASE
+    DATABASE_URL: $DATABASE_URL,
+    HOST: $HOSTNAME
+    EXTERNAL_PORT: 443,
+    SCHEME: https
 
 run:
   web: /app/geolocation_service_web/bin/geolocation_service_web start

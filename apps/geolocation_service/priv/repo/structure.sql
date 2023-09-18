@@ -35,7 +35,7 @@ CREATE TABLE public.geolocations (
     id bigint NOT NULL,
     ip_address character varying(16),
     country_code character varying(2),
-    country character varying(40),
+    country character varying(100),
     city character varying(40),
     latitude character varying(20),
     longitude character varying(20),
@@ -108,3 +108,4 @@ CREATE UNIQUE INDEX geolocations_ip_address_index ON public.geolocations USING b
 --
 
 INSERT INTO public."schema_migrations" (version) VALUES (20230915121901);
+INSERT INTO public."schema_migrations" (version) VALUES (20230918083952);

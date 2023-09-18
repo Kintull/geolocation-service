@@ -14,7 +14,7 @@ services:
 
   importer:
     image: geolocation_service:latest
-    command: /bin/sh -c "/app/run_import_task.sh import_geolocation_csv_dump"
+    command: /bin/sh -c "/app/run_task.sh import_geolocation_csv_dump"
     environment:
       DATABASE_URL: ecto://postgres:postgres@host.docker.internal/geolocation_service
       SECRET_KEY_BASE: ByhHybH2MlwacB09Sx8B5Adq1x+VEOZpCaHFUTiNNykj1m4XHvJ4Kvb5ynASB9se

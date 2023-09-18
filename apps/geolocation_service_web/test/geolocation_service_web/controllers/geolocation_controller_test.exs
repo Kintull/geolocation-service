@@ -7,7 +7,7 @@ defmodule GeolocationServiceWeb.GeolocationControllerTest do
     Hammox.expect(GeolocationService.impl(), :fetch_geolocation, fn _ip ->
       {:ok,
        %Geolocation{
-         id: 73448,
+         id: 73_448,
          ip_address: "200.106.141.15",
          country_code: "SI",
          country: "Nepal",

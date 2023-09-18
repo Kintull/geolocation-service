@@ -1,4 +1,8 @@
 defmodule GeolocationService.Release do
+  @moduledoc """
+  Module with helper functions for migrating database during release
+  """
+
   def migrate do
     ensure_started()
 

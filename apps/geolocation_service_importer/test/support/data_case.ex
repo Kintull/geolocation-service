@@ -15,6 +15,9 @@ defmodule GeolocationServiceImporter.DataCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Ecto.Adapters.SQL.Sandbox
+  alias GeolocationServiceImporter.DataCase
+  alias GeolocationServiceImporter.ImportRepo
 
   using do
     quote do
@@ -28,7 +31,7 @@ defmodule GeolocationServiceImporter.DataCase do
   end
 
   setup tags do
-    GeolocationServiceImporter.DataCase.setup_sandbox(tags)
+    DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -37,11 +40,11 @@ defmodule GeolocationServiceImporter.DataCase do
   """
   def setup_sandbox(tags) do
     pid =
-      Ecto.Adapters.SQL.Sandbox.start_owner!(GeolocationServiceImporter.ImportRepo,
+      Sandbox.start_owner!(ImportRepo,
         shared: not tags[:async]
       )
 
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
   end
 
   @doc """

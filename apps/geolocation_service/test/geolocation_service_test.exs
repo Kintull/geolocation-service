@@ -6,7 +6,7 @@ defmodule GeolocationServiceTest do
 
   test "fetch geolocation found" do
     Repo.insert!(%Geolocation{
-      id: 73448,
+      id: 73_448,
       ip_address: "200.106.141.15",
       country_code: "SI",
       country: "Nepal",

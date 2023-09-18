@@ -15,6 +15,9 @@ defmodule GeolocationService.DataCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Ecto.Adapters.SQL.Sandbox
+  alias GeolocationService.DataCase
+  alias GeolocationService.Repo
 
   using do
     quote do
@@ -28,7 +31,7 @@ defmodule GeolocationService.DataCase do
   end
 
   setup tags do
-    GeolocationService.DataCase.setup_sandbox(tags)
+    DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -36,10 +39,9 @@ defmodule GeolocationService.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid =
-      Ecto.Adapters.SQL.Sandbox.start_owner!(GeolocationService.Repo, shared: not tags[:async])
+    pid = Sandbox.start_owner!(Repo, shared: not tags[:async])
 
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
   end
 
   @doc """

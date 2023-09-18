@@ -16,7 +16,7 @@ defmodule GeolocationServiceImporter.Task.ImportGeolocationCSVDump do
   alias GeolocationService.Schema.Geolocation
   alias GeolocationServiceImporter.ImportRepo
 
-  def run() do
+  def run do
     write_batch_size = System.get_env("WRITE_BATCH_SIZE", "1000") |> String.to_integer()
     write_sleep_ms = System.get_env("WRITE_SLEEP_MS", "200") |> String.to_integer()
     csv_url = System.fetch_env!("CSV_URL")

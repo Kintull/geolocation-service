@@ -9,7 +9,7 @@ defmodule GeolocationService do
 
   @implementation Application.compile_env(:geolocation_service, :geolocation_service_impl)
 
-  def impl(), do: @implementation
+  def impl, do: @implementation
 
   alias GeolocationService.Schema.Geolocation
 

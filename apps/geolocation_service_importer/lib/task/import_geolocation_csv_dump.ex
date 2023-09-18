@@ -56,12 +56,21 @@ defmodule GeolocationServiceImporter.Task.ImportGeolocationCSVDump do
   defp fetch_csv(url) do
     @http_adapter.start()
 
-    %HTTPoison.Response{status_code: 200, body: body} =
-      @http_adapter.get!(
-        url,
-        %{},
-        follow_redirect: true
-      )
+    {rcv_time_msec, response} =
+      :timer.tc(fn ->
+        @http_adapter.get!(
+          url,
+          %{},
+          follow_redirect: true,
+          timeout: 30_000,
+          recv_timeout: 120_000
+        )
+      end)
+
+    rcv_time = rcv_time_msec / 1000 / 60
+    Logger.info("Received dump in #{rcv_time} seconds.")
+
+    %HTTPoison.Response{status_code: 200, body: body} = response
 
     body
   end
